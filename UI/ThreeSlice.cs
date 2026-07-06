@@ -11,19 +11,21 @@ public enum ThreeSliceTexture
     Right = 2
 }
 
-public class ThreeSlice
+public class ThreeSlice : IUiElement
 {
     private Subtexture[] _textures;
 
-    public Vector2 Position;
+    public Vector2 Position { get; set; }
 
-    public float Width;
+    public float Width { get; set; }
+
+    public float Scale { get; set; }
 
     public float Height => _textures[(int)ThreeSliceTexture.Left].Height * Scale;
 
-    public float Scale;
+    public bool IsVisible { get; set; }
 
-    public Color TextureColor;
+    public Color TextureColor { get; set; }
 
     public ThreeSlice()
     {
@@ -43,13 +45,15 @@ public class ThreeSlice
         Vector2 position,
         float width,
         float scale,
-        Color color)
+        Color color,
+        bool isVisible = false)
     {
         _textures = [leftTexture, middleTexture, rightTexture];
         Position = position;
         Width = width;
         Scale = scale;
         TextureColor = color;
+        IsVisible = isVisible;
     }
 
     public void SetTexture(ThreeSliceTexture selectedTexture, Subtexture newTexture)
