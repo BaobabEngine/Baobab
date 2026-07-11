@@ -58,8 +58,17 @@ public class Button(Vector2 position, ThreeSlice texture, TextSet text, bool isV
     {
         if (!IsVisible) return;
 
+        var boxCenteredHeight = Position.Y + (Height * .5f);
+
+        var textHeight = _font.HeightOf(Text);
+        // TODO: Implement a system for custom width offsets
+        var widthOffset = 3;
+        var heightOffset = textHeight * .5f;
+
+        Vector2 drawingPosition = new(Position.X + widthOffset, boxCenteredHeight - heightOffset);
+
         _texture.Draw(batcher);
-        _font.Draw(batcher, Text, Position, FontColor);
+        _font.Draw(batcher, Text, drawingPosition, FontColor);
     }
 
     public void Update(Input input, Vector2 offset = new())
