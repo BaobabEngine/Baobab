@@ -5,7 +5,7 @@ using BaobabEngine.Collisions;
 
 namespace BaobabEngine.UI;
 
-public class Button(Vector2 position, ThreeSlice texture, TextSet text, bool isVisible = false) : IUiElement
+public class Button(Vector2 position, ThreeSlice texture, TextSet text, Vector2 textOffset = new(), bool isVisible = false) : IUiElement
 {
     public event EventHandler? IsClicked;
 
@@ -18,6 +18,8 @@ public class Button(Vector2 position, ThreeSlice texture, TextSet text, bool isV
             _texture.Position = value;
         }
     } = position;
+
+    public Vector2 TextOffset = textOffset;
 
     public float Width
     {
@@ -61,11 +63,9 @@ public class Button(Vector2 position, ThreeSlice texture, TextSet text, bool isV
         var boxCenteredHeight = Position.Y + (Height * .5f);
 
         var textHeight = _font.HeightOf(Text);
-        // TODO: Implement a system for custom width offsets
-        var widthOffset = 3;
-        var heightOffset = textHeight * .5f;
+        var heightOffset = TextOffset.Y - (textHeight * .5f) ;
 
-        Vector2 drawingPosition = new(Position.X + widthOffset, boxCenteredHeight - heightOffset);
+        Vector2 drawingPosition = new(Position.X + TextOffset.X, boxCenteredHeight + heightOffset);
 
         _texture.Draw(batcher);
         _font.Draw(batcher, Text, drawingPosition, FontColor);
