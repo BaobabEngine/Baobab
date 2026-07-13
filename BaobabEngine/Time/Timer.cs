@@ -5,7 +5,7 @@ namespace BaobabEngine.Time;
 public class Timer(float durationInSeconds)
 {
     // Subscribe functions to be run once complete
-    public event EventHandler OnComplete;
+    public event EventHandler? OnComplete;
     
     private float _elapsedTime;
     

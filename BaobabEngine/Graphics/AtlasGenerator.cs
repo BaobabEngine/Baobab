@@ -12,7 +12,7 @@ public class AtlasGenerator
 {
     private readonly GraphicsDevice _graphicsDevice;
     
-    private Texture _atlas;
+    private Texture? _atlas;
     
     // The packer that will be used internally to pack images.
     private readonly Packer _packer = new();
@@ -21,7 +21,7 @@ public class AtlasGenerator
     public string ContentRoot { get; }
 
     // The paths to the assets relevant to the ContentRoot.
-    private readonly List<string> _assets;
+    private readonly List<string> _assets = new();
 
     // This dictionary will contain all the textures that are used in an atlas.
     private readonly Dictionary<string, Subtexture> _textures = new();
