@@ -23,14 +23,14 @@ public class Sprite
         Rotation = spriteRotation;
     }
 
-    public void Draw(Batcher batcher, Vector2 position)
+    public void Draw(in Batcher batcher, Vector2 position)
     {
         batcher.Image(Texture, position, new Vector2(Texture.Width / 2.0f, Texture.Height / 2.0f), 
             new Vector2(Scale), Rotation, Color.White);
     }
     
     // This override allows for mirroring sprites
-    public void Draw(Batcher batcher, Vector2 position, bool mirrorX, bool mirrorY)
+    public void Draw(in Batcher batcher, Vector2 position, bool mirrorX, bool mirrorY)
     {
         // Get the mirror scale using the arguments
         var xScale = (mirrorX) ? -Scale : Scale;
