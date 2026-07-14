@@ -1,4 +1,5 @@
-﻿using Foster.Framework;
+﻿using System;
+using Foster.Framework;
 using System.IO;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ namespace BaobabEngine.Graphics;
 ///  A class that uses Aseprite files and Foster's Packer class to generate
 ///  texture atlases for your game.
 /// </summary>
-public class AtlasGenerator
+public class AtlasGenerator : IDisposable
 {
     private readonly GraphicsDevice _graphicsDevice;
     
@@ -103,5 +104,16 @@ public class AtlasGenerator
         {
             _textures[entry.Name] = new Subtexture(_atlas, entry.Source, entry.Frame);
         }
+    }
+
+    /// <summary>
+    /// Disposes of the `Texture` held onto internally.
+    /// Any dependant sprites will break if they use a texture from a disposed atlas.
+    /// </summary>
+    public void Dispose()
+    {
+        _atlas?.Dispose();
+        _assets.Clear();
+        _textures.Clear();
     }
 }
