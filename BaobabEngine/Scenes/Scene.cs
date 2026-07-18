@@ -36,7 +36,7 @@ public abstract class Scene: IDisposable
     }
     
     protected abstract void UpdateScene(float deltaTime);
-    protected abstract void RenderScene(in Window window);
+    protected abstract void RenderScene(Window window);
 
     protected virtual void DisposeScene() { }
 }
