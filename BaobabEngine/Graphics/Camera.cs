@@ -7,6 +7,7 @@ public class Camera(Vector2 origin, Vector2 startingPosition, bool relative = fa
 {
     private readonly Vector2 _startingPosition = startingPosition;
     
+    public Vector2 Origin = origin;
     public Vector2 Position = startingPosition;
     public float Zoom = 1.0f;
     public float Rotation;
@@ -14,7 +15,7 @@ public class Camera(Vector2 origin, Vector2 startingPosition, bool relative = fa
     // Pushes the camera to the batcher to be applied when rendering
     public void Apply(in Batcher batcher)
     {
-        batcher.PushMatrix(Position, origin, new Vector2(Zoom), Rotation, relative);
+        batcher.PushMatrix(Position, Origin, new Vector2(Zoom), Rotation, relative);
     }
 
     public void Reset()
