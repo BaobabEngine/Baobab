@@ -9,12 +9,12 @@ public class Camera(Vector2 origin, Vector2 startingPosition, bool relative = fa
     
     public Vector2 Origin = origin;
     public Vector2 Position = startingPosition;
-    public float Zoom = 1.0f;
+    public Vector2 Zoom = new(1.0f);
     public float Rotation;
 
     public bool Relative = relative;
 
-    public Matrix3x2 Matrix => Transform.CreateMatrix(Position, Origin, new Vector2(Zoom), Rotation);
+    public Matrix3x2 Matrix => Transform.CreateMatrix(Position, Origin, Zoom, Rotation);
 
     // Pushes the camera to the batcher to be applied when rendering
     public void Apply(in Batcher batcher)
@@ -25,7 +25,7 @@ public class Camera(Vector2 origin, Vector2 startingPosition, bool relative = fa
     public void Reset()
     {
         Position = _startingPosition;
-        Zoom = 1.0f;
+        Zoom = new Vector2(1.0f);
         Rotation = 0.0f;
     }
 
