@@ -13,6 +13,12 @@ public class Sprite
     
     public float Width => Texture.Width * Scale;
     public float Height => Texture.Height * Scale;
+
+    public enum DrawPosition
+    {
+        Centered,
+        TopLeft
+    }
     
     public Sprite() { }
 
@@ -23,21 +29,31 @@ public class Sprite
         Rotation = spriteRotation;
     }
 
-    public void Draw(in Batcher batcher, Vector2 position)
-    {
-        batcher.Image(Texture, position, new Vector2(Texture.Width / 2.0f, Texture.Height / 2.0f), 
-            new Vector2(Scale), Rotation, Color.White);
-    }
-    
-    // This override allows for mirroring sprites
-    public void Draw(in Batcher batcher, Vector2 position, bool mirrorX, bool mirrorY)
+    public void Draw(in Batcher batcher, Vector2 position, Vector2 origin, bool mirrorX = false, bool mirrorY = false)
     {
         // Get the mirror scale using the arguments
         var xScale = (mirrorX) ? -Scale : Scale;
         var yScale = (mirrorY) ? -Scale : Scale;
-        
-        batcher.Image(Texture, position, new Vector2(Texture.Width / 2, Texture.Height / 2), 
+
+        batcher.Image(Texture, position, origin, 
             new Vector2(xScale, yScale), Rotation, Color.White);
+    }
+
+    public void Draw(in Batcher batcher, Vector2 position, DrawPosition origin = DrawPosition.Centered, 
+                     bool mirrorX = false, bool mirrorY = false)
+    {
+        Vector2 originVector = new();
+        switch (origin)
+        {
+            case DrawPosition.Centered:
+                originVector = new Vector2(Width * .5f, Height * .5f);
+                break;
+            case DrawPosition.TopLeft:
+                originVector = new Vector2(0f);
+                break;
+        }
+
+        Draw(batcher, position, originVector, mirrorX, mirrorY);
     }
 }
 
