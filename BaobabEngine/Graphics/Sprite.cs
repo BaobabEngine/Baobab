@@ -3,6 +3,12 @@ using System.Numerics;
 
 namespace BaobabEngine.Graphics;
 
+public enum DrawPosition
+{
+    Centered,
+    TopLeft
+}
+
 public class Sprite
 {
     public Subtexture Texture;
@@ -27,6 +33,29 @@ public class Sprite
     {
         batcher.Image(Texture, position, new Vector2(Texture.Width / 2.0f, Texture.Height / 2.0f), 
             new Vector2(Scale), Rotation, Color.White);
+    }
+
+    public void Draw(in Batcher batcher, Vector2 position, DrawPosition origin)
+    {
+        switch (origin)
+        {
+            case DrawPosition.Centered:
+                Draw(batcher, position);
+                break;
+            case DrawPosition.TopLeft:
+                DrawFromTopLeft(batcher, position);
+                break;
+        }
+    }
+
+    public void Draw(in Batcher batcher, Vector2 position, Vector2 origin)
+    {
+        batcher.Image(Texture, position, origin, new Vector2(Scale), Rotation, Color.White);
+    }
+
+    public void DrawFromTopLeft(in Batcher batcher, Vector2 position)
+    {
+        batcher.Image(Texture, position, new Vector2(0), new Vector2(Scale), Rotation, Color.White);
     }
     
     // This override allows for mirroring sprites
