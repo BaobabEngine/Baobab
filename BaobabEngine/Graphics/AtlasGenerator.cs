@@ -47,10 +47,34 @@ public class AtlasGenerator : IDisposable
     public void AddAsset(string assetPath) => _assets.Add(Path.Combine(ContentRoot, assetPath));
     public void RemoveAsset(string assetPath) => _assets.Remove(Path.Combine(ContentRoot, assetPath));
 
+    public void AddAsset(string[] assetPaths) => _assets.AddRange(assetPaths);   
+    public void RemoveAssets(int index, int count) => _assets.RemoveRange(index, count);
+    
+    public Dictionary<string, Subtexture> GetTextures() => _textures;
+
     public Subtexture GetTexture(string textureName)
     {
         return _textures[textureName];
     }
+
+    /// <summary>
+    /// Checks if an texture is in the atlas.
+    /// If the given texture is in the atlas, it returns true and `texture`
+    /// is set to the given texture.    /// </summary>
+    /// <param name="textureName"> The name of the texture being searched for.
+    /// <paramref name="asset"> The texture that was searched for (null if not found);
+    public bool TryGetTexture(string textureName, out Subtexture? asset)
+    {
+        if (_textures.ContainsKey(textureName))
+        {
+            asset = _textures[textureName];
+            return true;
+        }
+
+        asset = null;
+        return false;
+    }
+    
 
     public void Pack()
     {
