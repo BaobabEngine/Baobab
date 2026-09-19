@@ -46,10 +46,10 @@ public class Sprite
         switch (origin)
         {
             case DrawPosition.Centered:
-                originVector = new Vector2(Width * .5f, Height * .5f);
+                originVector = new Vector2(Texture.Width * .5f, Texture.Height * .5f);
                 break;
             case DrawPosition.TopLeft:
-                originVector = new Vector2(0f);
+                originVector = Vector2.Zero;
                 break;
         }
 
