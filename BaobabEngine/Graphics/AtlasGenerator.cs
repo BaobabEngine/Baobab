@@ -47,7 +47,12 @@ public class AtlasGenerator : IDisposable
     public void AddAsset(string assetPath) => _assets.Add(Path.Combine(ContentRoot, assetPath));
     public void RemoveAsset(string assetPath) => _assets.Remove(Path.Combine(ContentRoot, assetPath));
 
-    public void AddAsset(string[] assetPaths) => _assets.AddRange(assetPaths);   
+    public void AddAsset(string[] assetPaths)    
+    {
+        foreach (var asset in assetPaths)
+            AddAsset(asset);
+    }
+
     public void RemoveAssets(int index, int count) => _assets.RemoveRange(index, count);
     
     public Dictionary<string, Subtexture> GetTextures() => _textures;
