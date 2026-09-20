@@ -243,7 +243,7 @@ That gives you a simple way to trigger one-off or repeating behaviors tied to fr
 
 ### Asset atlas generation
 
-The `AtlasGenerator` class scans a content root, loads `.ase`, `.aseprite`, or `.png` assets, packs them together with Foster’s `Packer`, and exposes the generated `Subtexture`s by name.
+The `AtlasGenerator` class loads `.ase`, `.aseprite`, or `.png` assets, packs them together with Foster’s `Packer`, and exposes the generated `Subtexture`s by name.
 
 ```csharp
 public void Pack()
