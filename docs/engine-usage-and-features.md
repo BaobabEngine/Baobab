@@ -291,8 +291,6 @@ The project README describes the intended usage pattern as a code-first engine l
 
 Then you instantiate the app and call `.Run()` to start the game.
 
-The README also notes that the project is currently early-stage, but a NuGet package is already published:
-
 ```bash
 dotnet package add BaobabEngine.Baobab
 ```
@@ -305,9 +303,7 @@ The README outlines a short roadmap centered on features the project still wants
 
 1. GUI library
 2. Audio support
-3. More quality-of-life features
-
-This indicates Baobab is currently a foundational engine with core rendering, scene, and helper systems already in place, while remaining in an early stage.
+3. More quality-of-life features (particularly regarding game lifecycle)
 
 ## Stack summary
 
@@ -330,8 +326,4 @@ This matches the project’s central philosophy: freedom and clarity over editor
 ## License and attribution
 
 This project is licensed under the MIT license, and it explicitly credits the Foster Framework as a foundational dependency.
-
----
-
-This documentation was added to the `docs/engine-usage-and-features` branch for review.
 
