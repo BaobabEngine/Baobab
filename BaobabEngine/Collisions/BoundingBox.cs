@@ -5,15 +5,14 @@ using BaobabEngine.Graphics;
 namespace BaobabEngine.Collisions;
 
 /// <summary>
-/// A class that represents the hit-box of a sprite.
-/// These are not meant to be appended into a class. They are meant to be calculated at the time they are needed.
+/// A class that represents the hit-box of a sprite for collisions detection.
 /// </summary>
-public class BoundingBox
+public readonly struct BoundingBox
 {
     private readonly Vector2 _position;
     
-    private float _width;
-    private float _height;
+    private readonly float _width;
+    private readonly float _height;
     
     // Top and bottom Y positions of the bounding box
     public float Top => _position.Y - (_height / 2);
@@ -23,10 +22,10 @@ public class BoundingBox
     public float Left => _position.X - (_width / 2);
     public float Right => _position.X + (_width / 2);
 
-    public BoundingBox(Sprite sprite, Vector2 position)
+    public BoundingBox(Sprite sprite, Vector2 position, float scale = 1f)
     {
-        _width = sprite.Width;
-        _height = sprite.Height;
+        _width = sprite.Width * scale;
+        _height = sprite.Height * scale;
         _position = position;
     }
     
@@ -36,15 +35,8 @@ public class BoundingBox
         _height = height;
         _position = position;
     }
-    
-    // Used to cleanly scale your bounding box.
-    public void ScaleBoundingBox(float scale)
-    {
-        _width *= scale;
-        _height *= scale;
-    }
-    
-    // Checks if two bounding boxes intersect.
+        
+   
     public bool Intersects(BoundingBox other)
     {
         return !(Right < other.Left ||
