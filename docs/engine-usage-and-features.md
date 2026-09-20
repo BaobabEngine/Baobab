@@ -64,6 +64,8 @@ public abstract class Scene : IDisposable
 
 This lets developers create isolated game states and swap between them through `SceneManager`.
 
+It is also possible to switch and manage scenes manually, but the scene manager is intended to make this more convenient.
+
 ### Scene manager
 
 `SceneManager` keeps a reference to the current scene and exposes `Update`, `Render`, `Dispose`, and `SwitchScene` methods:
